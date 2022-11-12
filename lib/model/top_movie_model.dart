@@ -1,0 +1,83 @@
+// To parse this JSON data, do
+//
+//     final topRatedMovie = topRatedMovieFromJson(jsonString);
+
+import 'dart:convert';
+
+List<TopRatedMovieModel> topRatedMovieResponseFromJson(String str) =>
+    List<TopRatedMovieModel>.from(json
+        .decode(str)['results']
+        .map((x) => TopRatedMovieModel.fromJson(x)));
+
+class TopRatedMovieModel {
+  TopRatedMovieModel({
+    required this.adult,
+    required this.backdropPath,
+    required this.genreIds,
+    required this.id,
+    required this.originalLanguage,
+    required this.originalTitle,
+    required this.overview,
+    required this.popularity,
+    required this.posterPath,
+    required this.releaseDate,
+    required this.title,
+    required this.video,
+    required this.voteAverage,
+    required this.voteCount,
+  });
+
+  bool adult;
+  String backdropPath;
+  List<int> genreIds;
+  int id;
+  String originalLanguage;
+  String originalTitle;
+  String overview;
+  double popularity;
+  String posterPath;
+  DateTime releaseDate;
+  String title;
+  bool video;
+  double voteAverage;
+  int voteCount;
+
+  factory TopRatedMovieModel.fromJson(Map<String, dynamic> json) => TopRatedMovieModel(
+    adult: json["adult"],
+    backdropPath: json["backdrop_path"],
+    genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+    id: json["id"],
+    originalLanguage: json["original_language"],
+    originalTitle: json["original_title"],
+    overview: json["overview"],
+    popularity: json["popularity"].toDouble(),
+    posterPath: json["poster_path"],
+    releaseDate: DateTime.parse(json["release_date"]),
+    title: json["title"],
+    video: json["video"],
+    voteAverage: json["vote_average"].toDouble(),
+    voteCount: json["vote_count"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "adult": adult,
+    "backdrop_path": backdropPath,
+    "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+    "id": id,
+    "original_language": originalLanguage,
+    "original_title": originalTitle,
+    "overview": overview,
+    "popularity": popularity,
+    "poster_path": posterPath,
+    "release_date": "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+    "title": title,
+    "video": video,
+    "vote_average": voteAverage,
+    "vote_count": voteCount,
+  };
+
+  @override
+  String toString() {
+    return 'TopRatedMovieModel{adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount}';
+  }
+}
