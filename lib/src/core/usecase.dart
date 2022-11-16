@@ -1,5 +1,5 @@
-abstract class UseCases<Type> {
-Future<Type> callTrendingTvShow();
-Future<Type> callTrendingMovie();
-Future<Type> callTopRatedMovie();
+import 'package:movie_app/src/domain/entity/movie_entity.dart';
+
+abstract class UseCases<MovieEntity> {
+Future<MovieEntity> call();
 }
