@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/top_movie_model.dart';
-import 'package:movie_app/repository/top_rated_movie_repository.dart';
+import 'package:movie_app/src/presentation/bloc/top_rated_movie_bloc/top_rated_movie_bloc.dart';
+
 
 import '../../../injection.dart';
 import '../screens/movie_detail_screen.dart';
@@ -13,19 +13,16 @@ class TopRatedMovies extends StatefulWidget {
 }
 
 class _TopRatedMoviesState extends State<TopRatedMovies> {
-  late List<TopRatedMovieModel> topMovies = [];
-  late int length = 0;
 
   @override
   void initState() {
-    _getData();
+    _getTopMovieData();
     super.initState();
   }
 
-  void _getData() async {
-    final topRated = sl.get<TopRatedMoviesRepository>();
-    topMovies = (await topRated.getTopRatedMovie())!;
-    length = topMovies.length;
+  void _getTopMovieData() async {
+    final topRatedBloc = sl.get<TopRatedMovieBloc>();
+    topRatedBloc.add(TopRatedApiCall());
   }
 
   @override

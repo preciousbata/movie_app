@@ -1,6 +1,5 @@
-import 'package:movie_app/src/core/api_provider.dart';
 import 'package:movie_app/src/data/data_source/get_movie_remote_data_source.dart';
-import 'package:movie_app/src/domain/entity/trending_tv_show_entity.dart';
+import 'package:movie_app/src/domain/entity/movie_entity.dart';
 import 'package:movie_app/src/domain/repositories/get_movie_repo.dart';
 
 class GetMovieRepoImpl implements GetMovieRepository {

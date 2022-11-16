@@ -1,4 +1,4 @@
-import 'package:movie_app/src/domain/entity/trending_tv_show_entity.dart';
+import 'package:movie_app/src/domain/entity/movie_entity.dart';
 
 abstract class GetMovieRepository {
   Future<MovieEntity> getTopRatedMovie();
