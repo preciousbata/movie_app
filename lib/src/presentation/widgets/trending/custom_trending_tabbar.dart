@@ -28,15 +28,17 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar>
     _getTrendingMovieData();
     super.initState();
   }
-  void _getTrendingTvShowData() async {
+
+  void _getTrendingTvShowData() {
     final trendingTvShowBloc = sl.get<TrendingTvShowBloc>();
     trendingTvShowBloc.add(TrendingTvShowApiCall());
   }
 
-  void _getTrendingMovieData() async {
+  void _getTrendingMovieData()  {
     final trendingMovieBloc = sl.get<TrendingMovieBloc>();
     trendingMovieBloc.add(TrendingMovieApiCall());
   }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -68,7 +70,7 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar>
                           indicator: const BoxDecoration(
                               color: Colors.amber,
                               borderRadius:
-                              BorderRadius.all(Radius.circular(10))),
+                                  BorderRadius.all(Radius.circular(10))),
                           tabs: const [
                             Tab(
                               text: 'Movies',
@@ -91,21 +93,10 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar>
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
                     // height: 390,
-                    child: BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(
+                    child: BlocBuilder<TrendingMovieBloc, TrendingMovieState>(
                       builder: (context, state) {
-                        if (state is TopRatedMovieLoadedState){
-                          return ListView.builder(
-                              itemCount: trendingMovies.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (context, int index) {
-                                return TrendingMovieListTile(
-                                  title: trendingMovies[index].originalTitle,
-                                );
-                              });
-                        }else if(state is ErrorState) {
-                          return Center(child: Text(state.message));
+                        if (state is TrendingMovieLoadedState) {
+                          return buildTrendingMovieListView(state);
                         }
                       },
                     ),
@@ -113,17 +104,13 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar>
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
                     // height: 390,
-                    child: ListView.builder(
-                        itemCount: 5,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, int index) {
-                          return TrendingTvshowListTile(
-                            title: trendingTvShow[index].name,
-                            imageUrl: trendingTvShow[index].backdropPath,
-                          );
-                        }),
+                    child: BlocBuilder<TrendingTvShowBloc, TrendingTvShowState>(
+                      builder: (context, state) {
+                        if (state is TrendingTvShowLoadedState) {
+                          return buildTrendingTvShowListView(state);
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -132,5 +119,32 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar>
         ),
       ),
     );
+  }
+
+  ListView buildTrendingTvShowListView(TrendingTvShowLoadedState state) {
+    return ListView.builder(
+        itemCount: 5,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, int index) {
+          return TrendingTvshowListTile(
+            title: state.getMovieRepository.getTrendingTvShow,
+            imageUrl: trendingTvShow[index].backdropPath,
+          );
+        });
+  }
+
+  ListView buildTrendingMovieListView(TrendingMovieLoadedState state) {
+    return ListView.builder(
+        itemCount: trendingMovies.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, int index) {
+          return TrendingMovieListTile(
+            title: state.getMovieRepository.getTrendingMovie
+          );
+        });
   }
 }
