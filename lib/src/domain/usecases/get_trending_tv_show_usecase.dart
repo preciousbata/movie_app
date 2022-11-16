@@ -2,14 +2,13 @@ import 'package:movie_app/src/core/usecase.dart';
 import 'package:movie_app/src/domain/entity/movie_entity.dart';
 import 'package:movie_app/src/domain/repositories/get_movie_repo.dart';
 
-class GetTrendingTvShowUseCase extends UseCases<MovieEntity, NoParams> {
-  final GetMovieRepository getMovieRepository;
+class GetTrendingTvShowUseCase extends UseCase<List<MovieEntity>, NoParams> {
+  final GetMovieRepository movieRepository;
 
-  GetTrendingTvShowUseCase(this.getMovieRepository);
+  GetTrendingTvShowUseCase(this.movieRepository);
 
   @override
-  Future<MovieEntity> call(NoParams params) async {
-    return await getMovieRepository.getTrendingTvShow();
+  Future<List<MovieEntity>> call(NoParams params) {
+    return movieRepository.getTrendingTvShows();
   }
-
 }
