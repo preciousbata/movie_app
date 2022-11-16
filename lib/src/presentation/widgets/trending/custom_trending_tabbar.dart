@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/model/trending_movies.dart';
-import 'package:movie_app/model/trending_tvshow_model.dart';
-import 'package:movie_app/src/domain/usecases/get_trending_movie_usecase.dart';
-import 'package:movie_app/src/domain/usecases/get_trending_tv_show_usecase.dart';
-import 'package:movie_app/src/presentation/bloc/movie_bloc.dart';
+import 'package:movie_app/src/presentation/bloc/top_rated_movie_bloc/top_rated_movie_bloc.dart';
+import 'package:movie_app/src/presentation/bloc/trending_movie_bloc/trending_movie_bloc.dart';
+import 'package:movie_app/src/presentation/bloc/trending_tv_show_bloc/trendingtv_show_bloc.dart';
 import 'package:movie_app/src/presentation/widgets/trending/trending_movie_list_tile.dart';
 import 'package:movie_app/src/presentation/widgets/trending/trending_tvshow_list_tile.dart';
 
 import '../../../../injection.dart';
-import '../../../domain/usecases/get_top_rated_movie_usecase.dart';
 
 class CustomTrendingTabBar extends StatefulWidget {
   const CustomTrendingTabBar({
@@ -23,35 +20,23 @@ class CustomTrendingTabBar extends StatefulWidget {
 class _CustomTrendingTabBarState extends State<CustomTrendingTabBar>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  late List<TvShowResult> trendingTvShow = [];
-  late List<TrendingMovieResult> trendingMovies = [];
-  late MovieBloc movieBloc;
-  GetTopRatedMovieUseCase topRatedMovieUseCase =
-  sl.get<GetTopRatedMovieUseCase>();
-  GetTrendingTvShowUseCase trendingTvShowUseCase =
-  sl.get<GetTrendingTvShowUseCase>();
-  GetTrendingMovieUseCase trendingMovieUseCase =
-  sl.get<GetTrendingMovieUseCase>();
 
   @override
   void initState() {
     tabController = TabController(length: 2, vsync: this);
-    movieBloc = MovieBloc(
-        getTopRatedMovieUseCase: topRatedMovieUseCase,
-        getTrendingMovieUseCase: trendingMovieUseCase,
-        getTrendingTvShowUseCase: trendingTvShowUseCase);
-     movieBloc.add(TrendingTvShowApiCall());
-    movieBloc.add(TrendingMovieApiCall());
-    // _getData();
+    _getTrendingTvShowData();
+    _getTrendingMovieData();
     super.initState();
   }
+  void _getTrendingTvShowData() async {
+    final trendingTvShowBloc = sl.get<TrendingTvShowBloc>();
+    trendingTvShowBloc.add(TrendingTvShowApiCall());
+  }
 
-  // void _getData() async {
-  //   final trending = sl.get<TrendingRepository>();
-  //   trendingTvShow = (await trending.getTvShow())!;
-  //   trendingMovies = (await trending.getTrendingMovie())!;
-  // }
-
+  void _getTrendingMovieData() async {
+    final trendingMovieBloc = sl.get<TrendingMovieBloc>();
+    trendingMovieBloc.add(TrendingMovieApiCall());
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -106,9 +91,9 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar>
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
                     // height: 390,
-                    child: BlocBuilder<MovieBloc, MovieState>(
+                    child: BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(
                       builder: (context, state) {
-                        if (state is MovieLoadedState){
+                        if (state is TopRatedMovieLoadedState){
                           return ListView.builder(
                               itemCount: trendingMovies.length,
                               shrinkWrap: true,
