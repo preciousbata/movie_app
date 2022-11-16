@@ -4,7 +4,7 @@ abstract class MovieEvent extends Equatable {
   const MovieEvent();
 }
 
-class ApiCall extends MovieEvent{
+class FetchTrendingMoviesEvent extends MovieEvent{
   @override
   List<Object?> get props => [];
 }
