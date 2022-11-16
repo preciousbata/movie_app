@@ -13,11 +13,11 @@ class TopRatedMovieLoadingState extends TopRatedMovieState {
   List<Object> get props => [];
 }
 class TopRatedMovieLoadedState extends TopRatedMovieState {
-  final GetMovieRepository getMovieRepository;
+  final List<MovieEntity> movies;
 
-  const TopRatedMovieLoadedState({required this.getMovieRepository});
+  const TopRatedMovieLoadedState({required this.movies});
   @override
-  List<Object> get props => [getMovieRepository];
+  List<Object> get props => [movies];
 }
 class ErrorState extends TopRatedMovieState {
   final String message;

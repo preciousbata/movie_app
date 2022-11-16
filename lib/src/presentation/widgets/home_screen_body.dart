@@ -42,7 +42,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
             SizedBox(
               height: 12,
             ),
-            TopRatedMovies(),
+            ///TopRatedMovies(),
             SizedBox(
               height: 12,
             ),

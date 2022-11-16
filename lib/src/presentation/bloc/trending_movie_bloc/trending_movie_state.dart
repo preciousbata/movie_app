@@ -8,20 +8,27 @@ class TrendingMovieInitial extends TrendingMovieState {
   @override
   List<Object> get props => [];
 }
+
 class TrendingMovieLoading extends TrendingMovieState {
   @override
   List<Object> get props => [];
 }
+
 class TrendingMovieLoadedState extends TrendingMovieState {
-  final GetMovieRepository getMovieRepository;
-  const TrendingMovieLoadedState(this.getMovieRepository);
+  final List<MovieEntity> trendingMovies;
+  final List<MovieEntity> trendingTvShows;
+
+  const TrendingMovieLoadedState(this.trendingMovies, this.trendingTvShows);
+
   @override
-  List<Object> get props => [];
-}
-class ErrorState extends TrendingMovieState {
-  final String message;
-  const ErrorState(this.message);
-  @override
-  List<Object> get props => [];
+  List<Object> get props => [trendingMovies, trendingTvShows];
 }
 
+class ErrorState extends TrendingMovieState {
+  final String message;
+
+  const ErrorState(this.message);
+
+  @override
+  List<Object> get props => [];
+}

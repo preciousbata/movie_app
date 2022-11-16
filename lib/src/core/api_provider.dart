@@ -1,24 +1,22 @@
 import 'package:dio/dio.dart';
+
 class ApiProvider {
   late Dio dio;
 
   ApiProvider() {
-    dio = Dio(
-      BaseOptions(
+    dio = Dio(BaseOptions(
         validateStatus: (status) {
           return true;
         },
         followRedirects: false,
         baseUrl: 'https://api.themoviedb.org/3/',
-        connectTimeout: 30000
-      )
-    );
+        connectTimeout: 30000));
   }
-  Future<Map<String, dynamic>> get (String endpoint) async {
+
+  Future<Map<String, dynamic>> get(String endpoint) async {
     try {
       final response = await dio.get(endpoint);
-      final responseData =  response.data as Map<String,dynamic>;
-      return responseData;
+      return response.data;
     } on DioError catch (err) {
       throw ('The error is $err');
     }

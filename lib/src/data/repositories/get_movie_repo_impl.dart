@@ -3,25 +3,22 @@ import 'package:movie_app/src/domain/entity/movie_entity.dart';
 import 'package:movie_app/src/domain/repositories/get_movie_repo.dart';
 
 class GetMovieRepoImpl implements GetMovieRepository {
-  final GetMovieRemoteDataSource getMovieRemoteDataSource;
+  final GetMovieRemoteDataSource movieRemoteDataSource;
 
-  GetMovieRepoImpl(this.getMovieRemoteDataSource);
+  GetMovieRepoImpl(this.movieRemoteDataSource);
 
   @override
-  Future<MovieEntity> getTopRatedMovie() async {
-  final remoteTopRatedMovie = await getMovieRemoteDataSource.getTopRatedMovie();
-  return remoteTopRatedMovie;
+  Future<List<MovieEntity>> getTopRatedMovies() {
+    return Future.value([]);
   }
 
   @override
-  Future<MovieEntity> getTrendingMovie() async {
-    final remoteTrendingMovies = await getMovieRemoteDataSource.getTrendingMovie();
-    return remoteTrendingMovies;
+  Future<List<MovieEntity>> getTrendingMovies() {
+    return movieRemoteDataSource.getTrendingMovies();
   }
 
   @override
-  Future<MovieEntity> getTrendingTvShow() async {
-    final remoteTrendingTvShow = await getMovieRemoteDataSource.getTrendingTvShow();
-    return remoteTrendingTvShow;
+  Future<List<MovieEntity>> getTrendingTvShows() {
+    return Future.value([]);
   }
 }
