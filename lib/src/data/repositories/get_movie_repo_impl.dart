@@ -9,7 +9,7 @@ class GetMovieRepoImpl implements GetMovieRepository {
 
   @override
   Future<List<MovieEntity>> getTopRatedMovies() {
-    return Future.value([]);
+    return movieRemoteDataSource.getTopRatedMovie();
   }
 
   @override
@@ -19,6 +19,6 @@ class GetMovieRepoImpl implements GetMovieRepository {
 
   @override
   Future<List<MovieEntity>> getTrendingTvShows() {
-    return Future.value([]);
+    return movieRemoteDataSource.getTrendingTvShow();
   }
 }

@@ -26,6 +26,9 @@ class TrendingMovieBloc extends Bloc<TrendingMovieEvent, TrendingMovieState> {
         if (result[0].length > 5) {
           result[0] = result[0].take(5).toList();
         }
+        if (result[1].length > 5) {
+          result[1] = result[1].take(5).toList();
+        }
 
         emit(TrendingMovieLoadedState(result[0], result[1]));
       } on Exception catch (e) {

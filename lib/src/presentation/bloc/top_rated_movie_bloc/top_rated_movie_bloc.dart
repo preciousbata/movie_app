@@ -16,7 +16,11 @@ class TopRatedMovieBloc extends Bloc<TopRatedMovieEvent, TopRatedMovieState> {
     on<TopRatedApiCall>((event, emit) async {
       emit(TopRatedMovieLoadingState());
       try {
-        final movies = await topRatedMovieUseCase.call(NoParams());
+        var movies = await topRatedMovieUseCase.call(NoParams());
+
+        if (movies.length > 5){
+          movies = movies.take(5).toList();
+        }
         emit(TopRatedMovieLoadedState(movies: movies));
       } on Exception catch (e) {
         emit(ErrorState(message: '$e'));

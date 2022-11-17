@@ -6,6 +6,7 @@ import 'package:movie_app/src/presentation/widgets/trending/trending_movie_list_
 import 'package:movie_app/src/presentation/widgets/trending/trending_tvshow_list_tile.dart';
 
 import '../../../../injection.dart';
+import '../../screens/movie_detail_screen.dart';
 
 class CustomTrendingTabBar extends StatefulWidget {
   const CustomTrendingTabBar({
@@ -16,7 +17,8 @@ class CustomTrendingTabBar extends StatefulWidget {
   State<CustomTrendingTabBar> createState() => _CustomTrendingTabBarState();
 }
 
-class _CustomTrendingTabBarState extends State<CustomTrendingTabBar> with SingleTickerProviderStateMixin {
+class _CustomTrendingTabBarState extends State<CustomTrendingTabBar>
+    with SingleTickerProviderStateMixin {
   late TabController tabController;
   final trendingMovieBloc = sl.get<TrendingMovieBloc>();
 
@@ -52,9 +54,13 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar> with Single
                         child: TabBar(
                           controller: tabController,
                           indicatorColor: Colors.amber,
-                          labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          labelStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
                           unselectedLabelColor: Colors.grey,
-                          indicator: const BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.all(Radius.circular(10))),
+                          indicator: const BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
                           tabs: const [
                             Tab(
                               text: 'Movies',
@@ -81,15 +87,18 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar> with Single
                       bloc: trendingMovieBloc,
                       builder: (context, state) {
                         if (state is TrendingMovieLoadedState) {
-                          return _buildTrendingMovieListView(state.trendingMovies);
+                          return _buildTrendingMovieListView(
+                              state.trendingMovies);
                         } else if (state is TrendingMovieLoading) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator(
+                            color: Colors.amber,
+                          ));
                         }
                         return const SizedBox.shrink();
                       },
                     ),
                   ),
-
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
                     // height: 390,
@@ -97,9 +106,13 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar> with Single
                       bloc: trendingMovieBloc,
                       builder: (context, state) {
                         if (state is TrendingMovieLoadedState) {
-                          return _buildTrendingTvShowListView(state.trendingTvShows);
+                          return _buildTrendingTvShowListView(
+                              state.trendingTvShows);
                         } else if (state is TrendingMovieLoading) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator(
+                            color: Colors.amber,
+                          ));
                         }
                         return const SizedBox.shrink();
                       },
@@ -118,13 +131,17 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar> with Single
     return ListView.builder(
       itemCount: movies.length,
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (context, int index) {
         final movie = movies[index];
-        return TrendingTvshowListTile(
-          title: movie.name,
-          imageUrl: movie.backdropPath,
+        return GestureDetector(
+          onTap: () => Navigator.pushNamed(context, MovieDetailScreen.routeName,
+              arguments: movie),
+          child: TrendingTvshowListTile(
+            title: movie.name,
+            imageUrl: movie.backdropPath,
+            index: index + 1,
+          ),
         );
       },
     );
@@ -134,10 +151,18 @@ class _CustomTrendingTabBarState extends State<CustomTrendingTabBar> with Single
     return ListView.builder(
       itemCount: movies.length,
       shrinkWrap: true,
-      //physics: const NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (context, int index) {
-        return TrendingMovieListTile(title: movies[index].name,imageUrl: movies[index].backdropPath,);
+        final movie = movies[index];
+        return GestureDetector(
+          onTap: () => Navigator.pushNamed(context, MovieDetailScreen.routeName,
+              arguments: movie),
+          child: TrendingMovieListTile(
+            title: movie.title,
+            imageUrl: movie.backdropPath,
+            index: index + 1,
+          ),
+        );
       },
     );
   }

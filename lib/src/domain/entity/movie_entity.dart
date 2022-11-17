@@ -3,7 +3,7 @@ class MovieEntity {
   String backdropPath;
   int id;
   String name;
-  String originalName;
+  String title;
   String overview;
   String posterPath;
   List<int> genreIds;
@@ -17,7 +17,7 @@ class MovieEntity {
     required this.backdropPath,
     required this.id,
     required this.name,
-    required this.originalName,
+    required this.title,
     required this.overview,
     required this.posterPath,
     required this.genreIds,
@@ -33,7 +33,7 @@ class MovieEntity {
       backdropPath: json["backdrop_path"] ?? "",
       id: json["id"],
       name: json["name"] ?? "",
-      originalName: json["original_name"] ?? "",
+      title: json["title"] ?? "",
       overview: json["overview"] ?? "",
       posterPath: json["poster_path"] ?? "",
       genreIds: List<int>.from(json["genre_ids"].map((x) => x)),

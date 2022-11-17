@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/src/domain/entity/movie_entity.dart';
 
 import '../widgets/background_image.dart';
 
 class MovieDetailScreen extends StatelessWidget {
+  final MovieEntity movie;
   static String routeName = '/movie_detail';
 
-  const MovieDetailScreen({Key? key}) : super(key: key);
+  const MovieDetailScreen({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +23,14 @@ class MovieDetailScreen extends StatelessWidget {
           body: Column(
             children: [
               Container(
-                height: 500,
-                decoration: const BoxDecoration(
+                height: 510,
+                decoration:  BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('asset/images/container_bg.jpg'),
+                      image: NetworkImage('http://image.tmdb.org/t/p/w500/${movie.posterPath}'),
                       fit: BoxFit.cover,
                       colorFilter:
-                          ColorFilter.mode(Colors.black12, BlendMode.darken)),
-                  borderRadius: BorderRadius.only(
+                          const ColorFilter.mode(Colors.black12, BlendMode.darken)),
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10),
                   ),
@@ -53,20 +55,10 @@ class MovieDetailScreen extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              const Text(
-                'Movie Title',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 26,
-                    color: Colors.white),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Flexible(
+               Flexible(
                 child: Text(
-                  'Movie Summary',
-                  style: TextStyle(
+                  movie.overview,
+                  style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 26,
                       overflow: TextOverflow.ellipsis,
