@@ -23,6 +23,8 @@ The purpose of this repo is to follow up Clean Architecture principles in Flutte
 
 ## Blog post with implementation details explanation:
 [Reso Coder](https://resocoder.com/flutter-clean-architecture-tdd/)
+
+
 [Architecting Android… Reloaded](https://fernandocejas.com/2018/05/07/architecting-android-reloaded/)
 
 ## Demo
