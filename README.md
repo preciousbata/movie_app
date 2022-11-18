@@ -1,16 +1,31 @@
-# movie_app
+# Movie App
 
-A novie app project.
+![banner](https://miro.medium.com/max/720/1*0u-ekVHFu7Om7Z-VTwFHvg.png)
 
-## Getting Started
+# Flutter- Clean Architecture 
+The purpose of this repo is to follow up Clean Architecture principles in Flutter development. It is worth saying that the idea is to take advantage of the ease of testing and scalability that come with clean architecture.
 
-This project is a starting point for a Flutter application.
+## Clean Architecture
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_architecture_reloaded_main.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Android 3 Layers Architecture
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_architecture_reloaded_layers.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## UI Layer: MVVM
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_architecture_reloaded_mvvm_app.png)
+
+
+## Data Layer: Repository
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_archictecture_reloaded_repository.png)
+
+
+## Blog post with implementation details explanation:
+[Architecting Android… Reloaded](https://fernandocejas.com/2018/05/07/architecting-android-reloaded/)
+
+## Sample app
+![]()
+![](https://user-images.githubusercontent.com/1360604/31345866-679a221a-ad17-11e7-8097-7800edb677fa.gif)
+
+

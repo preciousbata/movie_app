@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/src/presentation/bloc/top_rated_movie_bloc/top_rated_movie_bloc.dart';
+import 'package:movie_app/src/presentation/bloc/trending_movie_bloc/trending_movie_bloc.dart';
 
 import '../../../injection.dart';
 import '../../domain/entity/movie_entity.dart';
 import '../screens/movie_detail_screen.dart';
 
-class TopRatedMovies extends StatefulWidget {
-  const TopRatedMovies({super.key});
+class TrendingTvShow extends StatefulWidget {
+  const TrendingTvShow({super.key});
 
   @override
-  State<TopRatedMovies> createState() => _TopRatedMoviesState();
+  State<TrendingTvShow> createState() => _TrendingTvShow();
 }
 
-class _TopRatedMoviesState extends State<TopRatedMovies> {
-  final topRatedMovieBloc = sl.get<TopRatedMovieBloc>();
+class _TrendingTvShow extends State<TrendingTvShow> {
+  final trendingMovieBloc = sl.get<TrendingMovieBloc>();
 
   @override
   void initState() {
-    topRatedMovieBloc.add(TopRatedApiCall());
+    trendingMovieBloc.add(TrendingMovieApiCall());
     super.initState();
   }
 
@@ -31,9 +31,9 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
           Row(
             children: const [
               Padding(
-                padding: EdgeInsets.only(left: 8, right: 190),
+                padding: EdgeInsets.only(left: 8, right: 110),
                 child: Text(
-                  'Top Rated',
+                  'Trending Tv Shows',
                   style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
@@ -55,12 +55,12 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 8),
             height: 200,
-            child: BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(
-              bloc: topRatedMovieBloc,
+            child: BlocBuilder<TrendingMovieBloc, TrendingMovieState>(
+              bloc: trendingMovieBloc,
               builder: (context, state) {
-                if (state is TopRatedMovieLoadedState) {
-                  return buildTopRatedListView(state.movies);
-                }else if (state is TopRatedMovieLoadingState){
+                if (state is TrendingMovieLoadedState) {
+                  return buildTopRatedListView(state.trendingTvShows);
+                }else if (state is TrendingMovieLoading){
                   return const Center(child:CircularProgressIndicator(
                     color: Colors.amber,
                   ),);
@@ -79,15 +79,15 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
         scrollDirection: Axis.horizontal,
         itemCount: movies.length,
         separatorBuilder: (_, __) => const SizedBox(
-              width: 20,
-            ),
+          width: 20,
+        ),
         itemBuilder: (content, int index) {
           final movie = movies[index];
           return GestureDetector(
             onTap: () =>
                 Navigator.pushNamed(context, MovieDetailScreen.routeName, arguments: movie),
             child: buildMovieContainer(
-                title: movie.title,
+                title: movie.name,
                 imageUrl: movie.backdropPath),
           );
         });
@@ -103,7 +103,7 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
               image: NetworkImage('http://image.tmdb.org/t/p/w500/$imageUrl'),
               fit: BoxFit.cover,
               colorFilter:
-                  const ColorFilter.mode(Colors.black12, BlendMode.darken)),
+              const ColorFilter.mode(Colors.black12, BlendMode.darken)),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
