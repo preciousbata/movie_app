@@ -1,6 +1,6 @@
-# Project Name
+# Moviezzzz
 
-Project Description
+An online movie streaming mobile application
 
 ## Packages
 
@@ -144,6 +144,7 @@ No additional configuration steps are required for the packages mentioned above.
 ## Yet to implement
 
 1. Movie Search Functionality
+2. Movie Streaming
 
 ## Contributing
 
