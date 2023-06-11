@@ -60,10 +60,12 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
               builder: (context, state) {
                 if (state is TopRatedMovieLoadedState) {
                   return buildTopRatedListView(state.movies);
-                }else if (state is TopRatedMovieLoadingState){
-                  return const Center(child:CircularProgressIndicator(
-                    color: Colors.amber,
-                  ),);
+                } else if (state is TopRatedMovieLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.amber,
+                    ),
+                  );
                 }
                 return const SizedBox.shrink();
               },
@@ -84,11 +86,11 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
         itemBuilder: (content, int index) {
           final movie = movies[index];
           return GestureDetector(
-            onTap: () =>
-                Navigator.pushNamed(context, MovieDetailScreen.routeName, arguments: movie),
+            onTap: () => Navigator.pushNamed(
+                context, MovieDetailScreen.routeName,
+                arguments: movie),
             child: buildMovieContainer(
-                title: movie.title,
-                imageUrl: movie.backdropPath),
+                title: movie.title, imageUrl: movie.backdropPath),
           );
         });
   }
