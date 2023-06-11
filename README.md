@@ -44,7 +44,8 @@ dependencies:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your/repository.git
+   git clone https://github.com/preciousbata/movie_app.git
+   
    ```
 
 2. Change to the project directory:
