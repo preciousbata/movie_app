@@ -2,6 +2,9 @@
 
 An online movie streaming mobile application
 
+## Demo
+https://github.com/preciousbata/movie_app/assets/42701343/76997c3d-ca0e-4fc4-b504-84d28cc81bea
+
 ## Packages
 
 The following packages are used in this project:
@@ -141,8 +144,6 @@ No additional configuration steps are required for the packages mentioned above.
      myBloc.add(DataUpdatedEvent('New Data'));
    }
    ```
-## Demo
-https://github.com/preciousbata/movie_app/assets/42701343/76997c3d-ca0e-4fc4-b504-84d28cc81bea
 
 ## Yet to implement
 
