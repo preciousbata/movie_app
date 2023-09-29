@@ -14,6 +14,7 @@ class ApiProvider {
   }
 
   Future<Map<String, dynamic>> get(String endpoint) async {
+    await Future.delayed(const Duration(seconds: 10));
     try {
       final response = await dio.get(endpoint);
       return response.data;

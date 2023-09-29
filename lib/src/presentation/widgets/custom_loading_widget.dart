@@ -10,8 +10,8 @@ class CustomLoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.black,
-      highlightColor: Colors.amber,
+      baseColor: Colors.grey.shade400,
+      highlightColor: Colors.grey.shade100,
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => const LoadingWidgetCard(),
