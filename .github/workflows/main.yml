@@ -1,10 +1,10 @@
-name: Build Moviezz APK
+    name: Build Moviezz APK
 on:
     push:
       branches:
         - main
  
-jobs:
+  jobs:
     build:
       name: Build and Release new apk
       runs-on: ubuntu-latest

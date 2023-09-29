@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/search_bar.dart';
+import '../widgets/movie_search_bar.dart';
 import '../widgets/top_rated_movies.dart';
 import '../widgets/trending_movie.dart';
 import '../widgets/trending_tv_show.dart';
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: size.height * 0.043,
                 ),
-                const SearchBar(),
+                const MovieSearchBar(),
                 const SizedBox(
                   height: 20,
                 ),

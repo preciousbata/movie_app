@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({
+class MovieSearchBar extends StatefulWidget {
+  const MovieSearchBar({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<MovieSearchBar> createState() => _MovieSearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _MovieSearchBarState extends State<MovieSearchBar> {
   final _formKey = GlobalKey<FormState>();
 
   @override
