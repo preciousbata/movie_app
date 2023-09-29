@@ -17,40 +17,32 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 22),
+          bottom: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Column(
-              children: const [
-                Padding(
-                  padding: EdgeInsets.only(top: 19),
-                  child: Text(
-                    'Moviezz',
-                    style: TextStyle(
-                        fontSize: 26,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+              children: [
                 SizedBox(
-                  height: 12,
+                  height: size.height * 0.043,
                 ),
-                SearchBar(),
-                SizedBox(
+                const SearchBar(),
+                const SizedBox(
                   height: 20,
                 ),
-                TopRatedMovies(),
-                SizedBox(
+                const TopRatedMovies(),
+                const SizedBox(
                   height: 20,
                 ),
-                TrendingMovies(),
-                SizedBox(
+                const TrendingMovies(),
+                const SizedBox(
                   height: 20,
                 ),
-                TrendingTvShow()
+                const TrendingTvShow()
               ],
             ),
           ),

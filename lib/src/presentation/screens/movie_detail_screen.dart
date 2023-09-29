@@ -25,19 +25,16 @@ class MovieDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Positioned(
-                top: 34,
-                child: Row(
-                  children: [
-                    IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(
-                          Icons.chevron_left,
-                          size: 50,
-                          color: Colors.green,
-                        ))
-                  ],
-                ),
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(
+                        Icons.chevron_left,
+                        size: 50,
+                        color: Colors.white,
+                      ))
+                ],
               ),
             ],
           ),
