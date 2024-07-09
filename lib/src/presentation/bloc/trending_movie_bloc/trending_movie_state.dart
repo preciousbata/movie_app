@@ -17,8 +17,11 @@ class TrendingMovieLoading extends TrendingMovieState {
 class TrendingMovieLoadedState extends TrendingMovieState {
   final List<MovieEntity> trendingMovies;
   final List<MovieEntity> trendingTvShows;
+   final List<MovieEntity> subtrendingMovies;
+  final List<MovieEntity> subtrendingTvShows;
+  final String header;
 
-  const TrendingMovieLoadedState(this.trendingMovies, this.trendingTvShows);
+  const TrendingMovieLoadedState({required this.subtrendingMovies, required this.subtrendingTvShows, required this.trendingMovies, required this.trendingTvShows, required this.header});
 
   @override
   List<Object> get props => [trendingMovies, trendingTvShows];

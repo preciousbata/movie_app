@@ -4,17 +4,18 @@ class ApiProvider {
   late Dio dio;
 
   ApiProvider() {
-    dio = Dio(BaseOptions(
+    dio = Dio(
+      BaseOptions(
         validateStatus: (status) {
           return true;
         },
         followRedirects: false,
         baseUrl: 'https://api.themoviedb.org/3/',
-        connectTimeout: 30000));
+      ),
+    );
   }
 
   Future<Map<String, dynamic>> get(String endpoint) async {
-    await Future.delayed(const Duration(seconds: 10));
     try {
       final response = await dio.get(endpoint);
       return response.data;

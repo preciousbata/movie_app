@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class Header extends StatelessWidget {
   final String title;
   final double rightPadding;
+  final void Function()? onTap;
   const Header({
     super.key,
     required this.title,
     required this.rightPadding,
+    required this.onTap,
   });
 
   @override
@@ -18,13 +20,16 @@ class Header extends StatelessWidget {
           child: Text(
             title,
             style: const TextStyle(
-                fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+                fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
-        const Text(
-          'View all',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
+        GestureDetector(
+          onTap: onTap,
+          child: const Text(
+            'View all',
+            style: TextStyle(
+                fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 16),
+          ),
         )
       ],
     );

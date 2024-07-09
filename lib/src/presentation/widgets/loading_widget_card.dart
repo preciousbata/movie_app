@@ -8,12 +8,12 @@ class LoadingWidgetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Skeleton(
-      height: 200,
+    return const Skeleton(
+      height: 120,
       width: 166,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: const [
+        children: [
           Padding(
               padding: EdgeInsets.only(bottom: 5.0),
               child: Skeleton(
@@ -21,6 +21,38 @@ class LoadingWidgetCard extends StatelessWidget {
                 height: 20,
                 width: 90,
               )),
+        ],
+      ),
+    );
+  }
+}
+
+class LoadingBannerWidget extends StatelessWidget {
+  const LoadingBannerWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 5.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Skeleton(
+            child: null,
+            height: 20,
+            width: 90,
+          ),
+          SizedBox(
+            width: 12,
+          ),
+          Skeleton(
+            child: null,
+            height: 20,
+            width: 90,
+          ),
         ],
       ),
     );

@@ -5,6 +5,9 @@ abstract class TrendingMovieEvent extends Equatable {
 }
 
 class TrendingMovieApiCall extends TrendingMovieEvent {
+  final bool isTrendingMovies;
+
+  const TrendingMovieApiCall({required this.isTrendingMovies});
   @override
   List<Object?> get props => [];
 
