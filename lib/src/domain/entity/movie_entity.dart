@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:movie_app/src/domain/entity/bookmark.dart';
+
 class MovieEntity {
   bool adult;
   String backdropPath;
@@ -27,6 +31,23 @@ class MovieEntity {
     required this.voteCount,
   });
 
+  factory MovieEntity.forTest() {
+    return MovieEntity(
+      adult: true,
+      backdropPath: '',
+      id: 4,
+      name: "Logan",
+      title: 'GTA',
+      overview: "overview",
+      posterPath: "posterPath",
+      genreIds: [],
+      popularity: 4,
+      firstAirDate: DateTime.now(),
+      voteAverage: 4,
+      voteCount: 4,
+    );
+  }
+
   factory MovieEntity.fromJson(Map<String, dynamic> json) {
     return MovieEntity(
       adult: json["adult"],
@@ -38,9 +59,39 @@ class MovieEntity {
       posterPath: json["poster_path"] ?? "",
       genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
       popularity: json["popularity"].toDouble(),
-      firstAirDate: json['first_air_date'] != null ? DateTime.parse(json["first_air_date"]) : DateTime.now(),
+      firstAirDate: json['first_air_date'] != null
+          ? DateTime.parse(json["first_air_date"])
+          : DateTime.now(),
       voteAverage: json["vote_average"].toDouble(),
       voteCount: json["vote_count"],
     );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  BookMark get bookmark {
+    return BookMark(
+        id: id,
+        title: title,
+        posterpath: posterPath,
+        backDropPath: backdropPath,
+        name: name);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'adult': adult,
+      'backdropPath': backdropPath,
+      'name': name,
+      'overview': overview,
+      'posterPath': posterPath,
+      'genreIds': genreIds,
+      'popularity': popularity,
+      'firstAirDate': firstAirDate,
+      'voteAverage': voteAverage,
+      'voteCount': voteAverage
+    };
   }
 }

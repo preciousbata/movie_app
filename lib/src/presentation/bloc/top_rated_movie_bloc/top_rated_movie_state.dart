@@ -14,8 +14,10 @@ class TopRatedMovieLoadingState extends TopRatedMovieState {
 }
 class TopRatedMovieLoadedState extends TopRatedMovieState {
   final List<MovieEntity> movies;
+  final List<MovieEntity> sublistmovies;
+  final String header;
 
-  const TopRatedMovieLoadedState({required this.movies});
+  const TopRatedMovieLoadedState({required this.movies,required this.sublistmovies, required this.header});
   @override
   List<Object> get props => [movies];
 }
