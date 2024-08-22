@@ -14,6 +14,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
           padding: EdgeInsets.only(left: 8, right: rightPadding),
@@ -25,10 +26,15 @@ class Header extends StatelessWidget {
         ),
         GestureDetector(
           onTap: onTap,
-          child: const Text(
-            'View all',
-            style: TextStyle(
-                fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 16),
+          child: const Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Text(
+              'View all',
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
+                  fontSize: 16),
+            ),
           ),
         )
       ],

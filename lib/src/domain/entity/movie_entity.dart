@@ -71,11 +71,18 @@ class MovieEntity {
 
   BookMark get bookmark {
     return BookMark(
+        adult: adult,
+        backdropPath: backdropPath,
         id: id,
+        name: name,
         title: title,
-        posterpath: posterPath,
-        backDropPath: backdropPath,
-        name: name);
+        overview: overview,
+        posterPath: posterPath,
+        genreIds: genreIds,
+        popularity: popularity,
+        firstAirDate: firstAirDate,
+        voteAverage: voteAverage,
+        voteCount: voteCount);
   }
 
   Map<String, dynamic> toMap() {

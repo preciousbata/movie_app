@@ -9,8 +9,15 @@ class DatabaseHelper {
   static const String columnId = 'id';
   static const String columnTitle = 'title';
   static const String columnName = 'name';
-  static const String columnPosterPathUrl = 'posterpath';
+  static const String columnPosterPathUrl = 'posterPath';
   static const String columnBackDropUrl = 'backDropPath';
+  static const String columnAdult = 'adult';
+  static const String columnOverview = 'overview';
+  static const String columnFirstAirDate = 'firstAirDate';
+  static const String columnVoteAverage = 'voteAverage';
+  static const String columnVoteCount = 'voteCount';
+  static const String columnGenreIds = 'genreIds';
+  static const String columnPopularity = 'popularity';
 
   Database? _database;
 
@@ -32,10 +39,17 @@ class DatabaseHelper {
       await db.execute('''
           CREATE TABLE $tableName (
             $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-            $columnTitle TEXT NOT NULL,
-            $columnName TEXT NOT NULL,
-            $columnPosterPathUrl TEXT NOT NULL,
-            $columnBackDropUrl TEXT NOT NULL
+            $columnTitle TEXT,
+            $columnName TEXT,
+            $columnPosterPathUrl TEXT,
+            $columnAdult INTEGER,
+            $columnOverview TEXT,
+            $columnFirstAirDate TEXT,
+            $columnVoteAverage REAL,
+            $columnVoteCount INTEGER,
+            $columnGenreIds TEXT,
+            $columnPopularity REAL,
+            $columnBackDropUrl TEXT
           )
         ''');
     });
@@ -49,13 +63,25 @@ class DatabaseHelper {
   Future<List<BookMark>> getBookmarks() async {
     Database db = await database;
     List<Map<String, dynamic>> maps = await db.query(tableName);
+
     return List.generate(maps.length, (i) {
       return BookMark(
         id: maps[i][columnId],
         title: maps[i][columnTitle],
         name: maps[i][columnName],
-        posterpath: maps[i][columnPosterPathUrl],
-        backDropPath: maps[i][columnBackDropUrl],
+        posterPath: maps[i][columnPosterPathUrl],
+        backdropPath: maps[i][columnBackDropUrl],
+        adult: maps[i][columnAdult] == 1, // Convert int to bool
+        voteAverage: maps[i][columnVoteAverage],
+        voteCount: maps[i][columnVoteCount],
+        popularity: maps[i][columnPopularity],
+        genreIds: (maps[i][columnGenreIds] as String)
+            .split(',')
+            .map((e) => int.parse(e))
+            .toList(), // Convert comma-separated String to List<int>
+        firstAirDate: DateTime.parse(
+            maps[i][columnFirstAirDate]), // Convert String to DateTime
+        overview: maps[i][columnOverview],
       );
     });
   }
@@ -78,7 +104,8 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
-    Future<bool> isMovieBookmarked(int id) async {
+
+  Future<bool> isMovieBookmarked(int id) async {
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query(
       'bookmarks',
@@ -87,5 +114,4 @@ class DatabaseHelper {
     );
     return result.isNotEmpty;
   }
-  
 }

@@ -14,14 +14,12 @@ class BookmarkCubit extends Cubit<BookmarkState> {
     try {
       await databaseHelper.insertBookmark(bookMark);
       // emit(state.)
-      emit(const BookmarkAddedSuccessfully(
-          message: 'Bookmark successfully added'));
+      emit(const BookmarkAddedSuccessfully(message: 'Bookmark successful'));
       bool isbookmarked = await databaseHelper.isMovieBookmarked(bookMark.id);
       emit(
           BookmarkUpdated(isMovieBookmarked: isbookmarked, bookMark: bookMark));
     } on Exception catch (e) {
       emit(const BookmarkError(message: 'Unable to add movie to bookmark'));
-      print(e);
     }
   }
 
@@ -33,7 +31,6 @@ class BookmarkCubit extends Cubit<BookmarkState> {
           message: 'Bookmark successfully deleted'));
     } on Exception catch (e) {
       emit(const BookmarkError(message: 'Unable to delete movie to bookmark'));
-      print(e);
     }
   }
 
@@ -48,7 +45,6 @@ class BookmarkCubit extends Cubit<BookmarkState> {
       }
     } on Exception catch (e) {
       emit(const BookmarkError(message: 'Unable to retrieve bookmarks'));
-      print(e);
     }
   }
 
@@ -59,7 +55,6 @@ class BookmarkCubit extends Cubit<BookmarkState> {
       emit(IsBookmarked(isMovieBookmarked: result));
     } on Exception catch (e) {
       emit(const BookmarkError(message: 'Unable to retrieve bookmarks'));
-      print(e);
     }
   }
 }

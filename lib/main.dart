@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/injection.dart' as di;
-import 'package:movie_app/src/presentation/screens/bottom_nav.dart';
+import 'package:movie_app/src/presentation/screens/home_screen.dart';
 
 import 'routes.dart';
 
@@ -20,9 +20,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Moviezz',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Mulish',),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Mulish',
+      ),
       routes: routes,
-      initialRoute: BottomNav.routeName,
+      initialRoute: HomeScreen.routeName,
     );
   }
 }

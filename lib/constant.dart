@@ -1,4 +1,6 @@
-String apiKey = '8796d8f88d7a86b2d8cc60ec10e473c9';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+String? apiKey = dotenv.env['API_KEY'];
 const double defaultPadding = 16.0;
 String searchMovieUrl =
     'https://api.themoviedb.org/3/search/movie?api_key=$apiKey&page=1&query=vampire%20diary&include_adult=false';

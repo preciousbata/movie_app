@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/injection.dart';
 import 'package:movie_app/src/core/extension_utils.dart';
@@ -96,9 +97,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       backgroundColor: Colors.white60,
                       child: IconButton(
                         onPressed: onPress,
-                        icon: const Icon(
-                          Icons.chevron_left,
+                        icon: const HugeIcon(
                           color: Colors.black,
+                          icon: HugeIcons.strokeRoundedBackward02,
                         ),
                       ),
                     ),
@@ -113,13 +114,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             : () => _cubit
                                 .addToBookmark(widget.screenArg.movie.bookmark),
                         icon: isbookmarked
-                            ? const Icon(
-                                Icons.bookmark_rounded,
+                            ? const HugeIcon(
                                 color: Colors.black,
+                                icon: HugeIcons.strokeRoundedBookmarkCheck02,
                               )
-                            : const Icon(
-                                Icons.bookmark_add_rounded,
+                            : const HugeIcon(
                                 color: Colors.black,
+                                icon: HugeIcons.strokeRoundedBookmarkAdd02,
                               ),
                       ),
                     ),

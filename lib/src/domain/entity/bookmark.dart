@@ -1,45 +1,70 @@
 import 'package:movie_app/src/domain/entity/movie_entity.dart';
 
 class BookMark {
-  final int id;
-  final String title, name;
-  final String backDropPath, posterpath;
+  bool adult;
+  String backdropPath;
+  int id;
+  String name;
+  String title;
+  String overview;
+  String posterPath;
+  List<int> genreIds;
+  double popularity;
+  DateTime firstAirDate;
+  double voteAverage;
+  int voteCount;
 
   BookMark(
-      {required this.id,
+      {required this.adult,
+      required this.backdropPath,
+      required this.id,
+      required this.name,
       required this.title,
-      required this.posterpath,
-      required this.backDropPath,
-      required this.name});
+      required this.overview,
+      required this.posterPath,
+      required this.genreIds,
+      required this.popularity,
+      required this.firstAirDate,
+      required this.voteAverage,
+      required this.voteCount});
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'title': title,
+      'adult': adult ? 1 : 0,
+      'backdropPath': backdropPath,
       'name': name,
-      'posterpath': posterpath,
-      'backDropPath': backDropPath,
+      'overview': overview,
+      'posterPath': posterPath,
+      'genreIds':
+          genreIds.join(','), // Convert List<int> to a comma-separated String
+      'popularity': popularity,
+      'firstAirDate':
+          firstAirDate.toIso8601String(), // Convert DateTime to ISO 8601 String
+      'voteAverage': voteAverage,
+      'voteCount': voteCount
     };
   }
 
   MovieEntity get movie {
     return MovieEntity(
         adult: true,
-        backdropPath: backDropPath,
+        backdropPath: backdropPath,
         id: id,
         name: name,
         title: title,
-        overview: '',
-        posterPath: posterpath,
-        genreIds: [],
-        popularity: 0,
-        firstAirDate: DateTime.timestamp(),
-        voteAverage: 0,
-        voteCount: 0);
+        overview: overview,
+        posterPath: posterPath,
+        genreIds: genreIds,
+        popularity: popularity,
+        firstAirDate: firstAirDate,
+        voteAverage: voteAverage,
+        voteCount: voteCount);
   }
 
   @override
   String toString() {
-    return 'BookMark{id: $id, title: $title, posterpath: $posterpath, backdrop:$backDropPath}';
+    return 'BookMark{adult: $adult, backdropPath: $backdropPath, id: $id, name: $name, title: $title, overview: $overview, posterPath: $posterPath, genreIds: $genreIds, popularity: $popularity, firstAirDate: $firstAirDate, voteAverage: $voteAverage, voteCount: $voteCount}';
   }
 }

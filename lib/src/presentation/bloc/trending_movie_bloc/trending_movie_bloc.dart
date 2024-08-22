@@ -26,7 +26,6 @@ class TrendingMovieBloc extends Bloc<TrendingMovieEvent, TrendingMovieState> {
           trendingMovieUseCase.call(NoParams()),
           trendingTvShowUseCase.call(NoParams()),
         ]);
-        print(result);
 
         if (result[0].length > 5) {
           sublistedTrendingMovies = result[0].take(5).toList();
